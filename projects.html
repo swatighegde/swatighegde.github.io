@@ -1,51 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Data Science Portfolio</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Swati's Interactive Portfolio - Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .light {
+            background-color: #f5f5f5;
+            color: #1f2937;
+        }
+        .card {
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .light .card {
+            background-color: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 999px;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+        .icon {
+            filter: grayscale(100%);
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+        .icon:hover {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
+<body class="dark scroll-smooth">
 
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+<!-- Light/Dark Mode Toggle -->
+<div class="fixed top-4 right-4 z-50">
+    <button id="theme-toggle" class="p-2 rounded-full card focus:outline-none">
+        <svg id="moon-icon" class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        <svg id="sun-icon" class="w-6 h-6 text-gray-800 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+    </button>
+</div>
 
-    <main>
-        <section class="projects">
-            <h1>My Projects</h1>
-            <div class="project-list">
-                <div class="project-card">
-                    <h2>CineMatch – Personalized Movie Recommendation System</h2>
-                    <p>This project implements a Hybrid Movie Recommendation System using the MovieLens dataset The system combines Collaborative Filtering (user–item rating patterns) and Content-Based Filtering (movie metadata such as genres and tags) to deliver more accurate and engaging recommendations.</p>
-                    <a href="https://github.com/swatighegde/datascience-kit/tree/main/CineMatch" class="view-code-btn">View Project Code</a>
+<!-- Header -->
+<header class="container mx-auto px-4 py-8 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
+    <a href="index.html" class="text-3xl font-bold transition-colors">Swati Hegde</a>
+    <nav class="mt-4 sm:mt-0">
+        <ul class="flex space-x-4 sm:space-x-8 text-lg">
+            <li><a href="index.html" class="transition-colors hover:text-purple-400">Home</a></li>
+            <li><a href="about.html" class="transition-colors hover:text-purple-400">About</a></li>
+            <li><a href="projects.html" class="transition-colors hover:text-purple-400">Projects</a></li>
+            <li><a href="contact.html" class="transition-colors hover:text-purple-400">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 py-12">
+    <!-- Projects Section -->
+    <section id="projects" class="py-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-center mb-12">My Projects</h1>
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <div class="card p-6">
+                <h3 class="text-2xl font-semibold">CineMatch – Personalized Movie Recommendation System</h3>
+                <p class="mt-2 text-gray-450">This project implements a Hybrid Movie Recommendation System using the MovieLens dataset. The system combines Collaborative Filtering (user–item rating patterns) and Content-Based Filtering (movie metadata such as genres and tags) to deliver more accurate and engaging recommendations.</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">Recommender systems</span>
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">Collaborative Filtering</span>
                 </div>
-                <div class="project-card">
-                    <h2>FraudShield – Credit Card Fraud Detection System</h2>
-                    <p>Fraudulent credit card transactions are a major challenge for the financial industry, leading to significant losses and reduced customer trust. FraudShield is a machine learning project that leverages Logistic Regression, Random Forest, and XGBoost to detect fraudulent transactions with high accuracy.</p>
-                    <a href="https://github.com/swatighegde/datascience-kit/tree/main/FraudShield" class="view-code-btn">View Project Code</a>
-                </div>
-                <div class="project-card">
-                    <h2>RetailVision – U.S. Retail Sales Forecasting</h2>
-                    <p>RetailVision is a time series forecasting project that predicts U.S. monthly retail sales using Prophet, SARIMA and Linear Regression to uncover seasonal trends, anomalies, and growth patterns.</p>
-                    <a href="https://github.com/swatighegde/datascience-kit/tree/main/RetailVision" class="view-code-btn">View Project Code</a>
+                <div class="mt-6">
+                    <a href="https://github.com/swatighegde/datascience-kit/tree/main/CineMatch" class="text-purple-400 hover:text-purple-300 font-medium">View Project Code →</a>
                 </div>
             </div>
-        </section>
-    </main>
+            <!-- Project 2 -->
+            <div class="card p-6">
+                <h3 class="text-2xl font-semibold">FraudShield – Credit Card Fraud Detection System</h3>
+                <p class="mt-2 text-gray-450">Fraudulent credit card transactions are a major challenge for the financial industry, leading to significant losses and reduced customer trust. FraudShield is a machine learning project that leverages Logistic Regression, Random Forest, and XGBoost to detect fraudulent transactions with high accuracy.</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">Logistic Regression</span>
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">Random Forest</span>
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">XGBoost</span>
+                </div>
+                <div class="mt-6">
+                    <a href="https://github.com/swatighegde/datascience-kit/tree/main/FraudShield" class="text-purple-400 hover:text-purple-300 font-medium">View Project Code →</a>
+                </div>
+            </div>
+            <!-- Project 3 -->
+            <div class="card p-6">
+                <h3 class="text-2xl font-semibold">RetailVision – U.S. Retail Sales Forecasting</h3>
+                <p class="mt-2 text-gray-450">RetailVision is a time series forecasting project that predicts U.S. monthly retail sales using Prophet, SARIMA and Linear Regression to uncover seasonal trends, anomalies, and growth patterns.</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">Time Series</span>
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">Linear Regression</span>
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">Prophet</span>
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">SARIMA</span>
+                </div>
+                <div class="mt-6">
+                    <a href="https://github.com/swatighegde/datascience-kit/tree/main/RetailVision" class="text-purple-400 hover:text-purple-300 font-medium">View Project Code →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
-    <footer>
-        <p>© 2025 Swati G Hegde | Data Science Portfolio</p>
-    </footer>
+<!-- Footer -->
+<footer class="text-center py-8 text-gray-450">
+    <p>&copy; 2024 Swati Hegde. All Rights Reserved.</p>
+</footer>
+
+<script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const moonIcon = document.getElementById('moon-icon');
+    const sunIcon = document.getElementById('sun-icon');
+
+    themeToggle.addEventListener('click', () => {
+        if (body.classList.contains('dark')) {
+            body.classList.remove('dark');
+            body.classList.add('light');
+            moonIcon.classList.add('hidden');
+            sunIcon.classList.remove('hidden');
+        } else {
+            body.classList.remove('light');
+            body.classList.add('dark');
+            moonIcon.classList.remove('hidden');
+            sunIcon.classList.add('hidden');
+        }
+    });
+</script>
+
 </body>
-
 </html>
