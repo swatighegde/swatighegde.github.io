@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swati's Interactive Portfolio - Home</title>
+    <title>Swati's Interactive Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        html {
+            scroll-behavior: smooth;
+            /* Adjusted this value to bring the content up, allowing more to fit on the screen. */
+            scroll-padding-top: 3rem;
+        }
         body {
             font-family: 'Inter', sans-serif;
             transition: background-color 0.3s, color 0.3s;
@@ -30,135 +35,207 @@
             background-color: rgba(0, 0, 0, 0.05);
             border: 1px solid rgba(0, 0, 0, 0.1);
         }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
         }
-        .btn {
-            background: linear-gradient(90deg, #6366f1, #8b5cf6);
-            border: none;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 999px;
-            font-weight: 600;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        .animate-fade-in-up {
+            animation: fade-in-up 0.6s ease-out forwards;
         }
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
-        }
-        .icon {
-            filter: grayscale(100%);
-            transition: filter 0.3s ease, transform 0.3s ease;
-        }
-        .icon:hover {
-            filter: grayscale(0%);
-            transform: scale(1.1);
-        }
-        .scroll-smooth {
-            scroll-behavior: smooth;
-        }
-        .typewriter-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 40px; /* Ensures consistent layout during typing */
-        }
-        .typewriter-text {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 2px solid white;
-            animation: blink-caret .75s step-end infinite;
-        }
-
-        /* The typewriter cursor effect */
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: white; }
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
-<body class="dark scroll-smooth">
+<body class="dark">
 
-<!-- Light/Dark Mode Toggle -->
-<div class="fixed top-4 right-4 z-50">
-    <button id="theme-toggle" class="p-2 rounded-full card focus:outline-none">
-        <svg id="moon-icon" class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-        <svg id="sun-icon" class="w-6 h-6 text-gray-800 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-    </button>
-</div>
-
-<!-- Header -->
-<header class="container mx-auto px-4 py-8 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
-    <a href="index.html" class="text-3xl font-bold transition-colors">Swati Hegde</a>
-    <nav class="mt-4 sm:mt-0">
-        <ul class="flex space-x-4 sm:space-x-8 text-lg">
-            <li><a href="index.html" class="transition-colors hover:text-purple-400">Home</a></li>
-            <li><a href="about.html" class="transition-colors hover:text-purple-400">About</a></li>
-            <li><a href="projects.html" class="transition-colors hover:text-purple-400">Projects</a></li>
-            <li><a href="contact.html" class="transition-colors hover:text-purple-400">Contact</a></li>
-        </ul>
+<header class="fixed top-0 left-0 w-full z-50 py-4 px-6 md:px-12 backdrop-blur-lg bg-white/5 shadow-md transition-all duration-300 ease-in-out">
+    <nav class="flex justify-between items-center">
+        <a href="#home" class="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+            Swati Hegde
+        </a>
+        <div class="flex items-center space-x-4">
+            <a href="#home" class="text-lg text-gray-400 hover:text-white transition-colors duration-200 hidden md:block">Home</a>
+            <a href="#about" class="text-lg text-gray-400 hover:text-white transition-colors duration-200 hidden md:block">About</a>
+            <a href="#projects" class="text-lg text-gray-400 hover:text-white transition-colors duration-200 hidden md:block">Projects</a>
+            <a href="#contact" class="text-lg text-gray-400 hover:text-white transition-colors duration-200 hidden md:block">Contact</a>
+            
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors duration-200">
+                <svg id="moon-icon" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                <svg id="sun-icon" class="w-6 h-6 text-gray-400 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.356 2.356a1 1 0 01.707 1.707l-.707.707a1 1 0 11-1.414-1.414l.707-.707zm-8.485 0l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 111.414 1.414zM2 10a1 1 0 011-1h1a1 1 0 110 2H3a1 1 0 01-1-1zm15 0a1 1 0 01-1-1h-1a1 1 0 110 2h1a1 1 0 011-1zm-3.356-4.356a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 111.414-1.414l.707.707zm-8.485 0l-.707-.707a1 1 0 011.414-1.414l.707.707a1 1 0 01-1.414 1.414zM10 15a1 1 0 01-1 1v1a1 1 0 112 0v-1a1 1 0 01-1-1zm0-10a1 1 0 011-1h1a1 1 0 110 2h-1a1 1 0 01-1-1z"></path></svg>
+            </button>
+        </div>
     </nav>
 </header>
 
-<main class="container mx-auto px-4 py-12">
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center">
-        <h1 class="text-5xl md:text-7xl font-bold leading-tight animate-fade-in-down">
-            Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Swati Hegde</span>
-        </h1>
-        <div class="mt-4 text-xl md:text-2xl text-gray-450 typewriter-container">
-            <span id="typewriter-text" class="typewriter-text"></span>
-        </div>
-        <p class="mt-4 text-sm md:text-lg text-gray-450 max-w-2xl px-4 animate-fade-in-up">
-            A passionate Data Scientist with 7 years of experience transforming data into actionable insights.
-Skilled in AI/ML model development, data analysis, and interactive visualization.
-Driven to solve complex problems and create meaningful impact through data and analytics.
-        </p>
-        <div class="mt-8 flex space-x-4 animate-fade-in-up delay-300">
-            <a href="contact.html" class="btn">Get In Touch</a>
-            <a href="projects.html" class="btn bg-gray-600 hover:bg-gray-700">View My Work</a>
-        </div>
+<main class="py-24 px-6 md:px-12 space-y-24 md:space-y-36">
 
-        <!-- Social Icons -->
-        <div class="mt-8 flex space-x-6 items-center">
-            <a href="https://www.linkedin.com/in/swatihegde/" target="_blank" rel="noopener noreferrer" class="transition-all hover:scale-110">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400 hover:text-blue-500 transition-colors">
-                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.763s.784-1.763 1.75-1.763 1.75.79 1.75 1.763-.783 1.763-1.75 1.763zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.676 7 2.766v6.469z"/>
+    <section id="home" class="min-h-screen flex items-center justify-center text-center">
+        <div class="space-y-6 -mt-4 animate-fade-in-up">
+            <h1 class="text-6xl md:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                Hi, I am Swati Hegde
+            </h1>
+            <p id="typewriter-text" class="text-xl md:text-2xl font-medium text-gray-450 h-8"></p>
+            <p class="text-lg md:text-xl text-gray-450 max-w-2xl mx-auto leading-relaxed">
+                A passionate Data Scientist with 7 years of experience transforming data into actionable insights.
+                Skilled in AI/ML model development, data analysis, and interactive visualization.
+                Driven to solve complex problems and create meaningful impact through data and analytics.
+            </p>
+            <div class="mt-8 flex justify-center space-x-6 items-center">
+                <a href="https://www.linkedin.com/in/swatihegde/" target="_blank" rel="noopener noreferrer" class="transition-all hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400 hover:text-blue-500 transition-colors">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.763s.784-1.763 1.75-1.763 1.75.79 1.75 1.763-.783 1.763-1.75 1.763zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.676 7-2.766v6.469z"/>
                 </svg>
-            </a>
-            <a href="https://github.com/swatighegde" target="_blank" rel="noopener noreferrer" class="transition-all hover:scale-110">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400 hover:text-white transition-colors">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.809 1.305 3.49-1.05.108-.838.414-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-            </a>
-            <a href="mailto:hegdeswati95@gmail.com" target="_blank" rel="noopener noreferrer" class="transition-all hover:scale-110">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400 hover:text-red-500 transition-colors">
-                    <path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.586l-12-9.721v12.208h24v-12.208l-12 9.721z"/>
-                </svg>
-            </a>
-            <!-- Kaggle Logo -->
-            <a href="https://www.kaggle.com/swatih/" target="_blank" rel="noopener noreferrer" class="transition-all hover:scale-110">
-                <svg width="25" height="25" viewBox="0 0 100 100" class="text-sky-500 hover:text-sky-400 transition-colors">
-                    <text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" font-family="Inter, sans-serif" font-size="90" font-weight="bold" fill="currentColor">k</text>
-                </svg>
-            </a>
-            <!-- Medium Logo -->
-            <a href="https://medium.com/@hegdeswati95/" target="_blank" rel="noopener noreferrer" class="transition-all hover:scale-110">
-                <svg width="25" height="25" viewBox="0 0 1770 1000" fill="currentColor" class="text-gray-400 hover:text-white transition-colors">
-                    <circle cx="500" cy="500" r="500" />
-                    <ellipse ry="475" rx="250" cy="501" cx="1296" />
-                    <ellipse cx="1682" cy="502" rx="88" ry="424" />
-                </svg>
-            </a>
+                </a>
+                <a href="https://github.com/swatighegde" target="_blank" rel="noopener noreferrer" class="transition-all hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400 hover:text-white transition-colors">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.809 1.305 3.49-1.05.108-.838.414-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="mailto:hegdeswati95@gmail.com" target="_blank" rel="noopener noreferrer" class="transition-all hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400 hover:text-red-500 transition-colors">
+                        <path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.586l-12-9.721v12.208h24v-12.208l-12 9.721z"/>
+                    </svg>
+                </a>
+                <a href="https://www.kaggle.com/swatih/" target="_blank" rel="noopener noreferrer" class="transition-all hover:scale-110">
+                    <svg width="35" height="35" viewBox="0 0 100 100" class="text-gray-400 hover:text-sky-400 transition-colors">
+                        <text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" font-family="Inter, sans-serif" font-size="90" font-weight="bold" fill="currentColor">k</text>
+                    </svg>
+                </a>
+                <a href="https://medium.com/@hegdeswati95/" target="_blank" rel="noopener noreferrer" class="transition-all hover:scale-110">
+                    <svg width="35" height="35" viewBox="0 0 1770 1000" fill="currentColor" class="text-gray-400 hover:text-white transition-colors">
+                        <circle cx="500" cy="500" r="500" />
+                        <ellipse ry="475" rx="250" cy="501" cx="1296" />
+                        <ellipse cx="1682" cy="502" rx="88" ry="424" />
+                    </svg>
+                </a>
+            </div>
+            <div class="mt-8 flex justify-center space-x-4">
+                <a href="#projects" class="px-6 py-3 rounded-lg font-bold text-white transition-all duration-300 ease-in-out transform hover:scale-105 bg-gradient-to-r from-blue-400 to-purple-500 hover:from-blue-500 hover:to-purple-600">
+                    View My Work
+                </a>
+                <a href="#contact" class="px-6 py-3 rounded-lg font-bold text-white transition-all duration-300 ease-in-out transform hover:scale-105 bg-gradient-to-r from-blue-400 to-purple-500 hover:from-blue-500 hover:to-purple-600">
+                    Get in Touch
+                </a>
+            </div>
         </div>
     </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-12">
+        <div class="w-full max-w-6xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500 animate-fade-in-up">
+                About Me
+            </h2>
+            <div class="space-y-6">
+                <!-- About Me Card -->
+                <div class="card p-5 md:p-5 animate-fade-in-up">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">About Me</h3>
+                    <p class="text-gray-450 text-lg">I am a passionate AI/ML professional with 7 years of experience in building data-driven solutions. I specialize in developing and optimizing ML models, creating impactful visualizations, and uncovering actionable insights.</p>
+                </div>
+
+                <!-- Technical Skills Card -->
+                <div class="card p-5 md:p-5 animate-fade-in-up delay-150">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">⚙️ Technical Skills</h3>
+                    <div class="text-gray-450 text-lg">
+                        <p class="mb-2"><strong>Programming Languages:</strong> Python, SQL, PL/SQL</p>
+                        <p class="mb-2"><strong>Data Science Tools:</strong> Numpy, Pandas, NLTK, Matplotlib, Tensorflow, Keras, Scikit-learn</p>
+                        <p class="mb-2"><strong>ML Techniques:</strong> Classification, Regression, Clustering, Association, Recommender Systems</p>
+                        <p class="mb-2"><strong>DL Techniques:</strong> ANN, RNN, CNN, NLP, Transformer Models</p>
+                        <p class="mb-2"><strong>Other Tools:</strong> FastAPI, Git, Tableau</p>
+                        <p><strong>Cloud Technologies:</strong> AWS - S3, EC2, SageMaker, Dynamo DB, RDS</p>
+                    </div>
+                </div>
+                
+                <!-- What Drives Me Card -->
+                <div class="card p-5 md:p-5 animate-fade-in-up delay-300">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">What Drives Me</h3>
+                    <p class="text-gray-450 text-lg">I enjoy tackling challenging projects that create meaningful impact through data-driven insights. I am passionate about developing scalable, reliable AI and predictive modeling solutions. Continuously learning new technologies, I strive to stay ahead in the evolving data landscape.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-12">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 animate-fade-in-up">
+            My Projects
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="card p-6 md:p-8 animate-fade-in-up">
+                <h3 class="text-xl md:text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">CineMatch – Personalized Movie Recommendation System</h3>
+                <p class="text-gray-450 mb-4">This project implements a Hybrid Movie Recommendation System using the MovieLens dataset. The system combines Collaborative Filtering (user–item rating patterns) and Content-Based Filtering (movie metadata such as genres and tags) to deliver more accurate and engaging recommendations.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">Recommender systems</span>
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">Collaborative Filtering</span>
+                </div>
+                <div class="mt-6">
+                    <a href="https://github.com/swatighegde/datascience-kit/tree/main/CineMatch" target="_blank" class="text-purple-400 hover:text-purple-300 font-medium">View Project Code →</a>
+                </div>
+            </div>
+            <div class="card p-6 md:p-8 animate-fade-in-up delay-100">
+                <h3 class="text-xl md:text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">FraudShield – Credit Card Fraud Detection System</h3>
+                <p class="text-gray-450 mb-4">Fraudulent credit card transactions are a major challenge for the financial industry, leading to significant losses and reduced customer trust. FraudShield is a machine learning project that leverages Logistic Regression, Random Forest, and XGBoost to detect fraudulent transactions with high accuracy.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">Logistic Regression</span>
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">Random Forest</span>
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">XGBoost</span>
+                </div>
+                <div class="mt-6">
+                    <a href="https://github.com/swatighegde/datascience-kit/tree/main/FraudShield" target="_blank" class="text-purple-400 hover:text-purple-300 font-medium">View Project Code →</a>
+                </div>
+            </div>
+            <div class="card p-6 md:p-8 animate-fade-in-up delay-200">
+                <h3 class="text-xl md:text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-yellow-500">RetailVision – U.S. Retail Sales Forecasting</h3>
+                <p class="text-gray-450 mb-4">RetailVision is a time series forecasting project that predicts U.S. monthly retail sales using Prophet, SARIMA and Linear Regression to uncover seasonal trends, anomalies, and growth patterns.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">Time Series</span>
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">Linear Regression</span>
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">Prophet</span>
+                    <span class="text-sm px-3 py-1 bg-gray-600 text-gray-200 rounded-full">SARIMA</span>
+                </div>
+                <div class="mt-6">
+                    <a href="https://github.com/swatighegde/datascience-kit/tree/main/RetailVision" target="_blank" class="text-purple-400 hover:text-purple-300 font-medium">View Project Code →</a>
+                </div>
+                </div>
+            </div>
+        </section>
+
+    <section id="contact" class="min-h-screen flex items-center justify-center py-12">
+        <div class="w-full max-w-xl text-center animate-fade-in-up">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500">
+                Get in Touch
+            </h2>
+            <p class="text-gray-450 text-lg mb-8">
+                I’m always open to new opportunities, collaborations, or project discussions —
+feel free to reach out and drop me a message!
+            </p>
+            <div class="flex justify-center space-x-6">
+                <a href="mailto:hegdeswati95@gmail.com" class="icon p-4 card hover:bg-white/10 transition-colors">
+                    <svg class="w-10 h-10 text-gray-400 hover:text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 4H2C.895 4 0 4.895 0 6v12c0 1.105.895 2 2 2h20c1.105 0 2-.895 2-2V6c0-1.105-.895-2-2-2zm-2.032 2L12 11.236 4.032 6H21.968zM22 18H2V8.125l9.467 5.523c.313.183.67.275 1.033.275s.72-.092 1.033-.275L22 8.125V18z"></path></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/swatihegde/" target="_blank" class="icon p-4 card hover:bg-white/10 transition-colors">
+                    <svg class="w-10 h-10 text-gray-400 hover:text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.769s.784-1.769 1.75-1.769 1.75.79 1.75 1.769-.783 1.769-1.75 1.769zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                </a>
+                <a href="https://github.com/swatighegde" target="_blank" class="icon p-4 card hover:bg-white/10 transition-colors">
+                    <svg class="w-10 h-10 text-gray-400 hover:text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.809 1.305 3.492.997.107-.775.418-1.305.762-1.605-2.665-.304-5.467-1.334-5.467-5.931 0-1.311.465-2.381 1.236-3.221-.124-.303-.535-1.524.118-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.771.84 1.236 1.911 1.236 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.196-6.086 8.196-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
 </main>
 
-<!-- Footer -->
 <footer class="text-center py-8 text-gray-450">
-    <p>&copy; 2024 Swati Hegde. All Rights Reserved.</p>
+    <p>&copy; 2025 Swati Hegde. All Rights Reserved.</p>
 </footer>
 
 <script>
